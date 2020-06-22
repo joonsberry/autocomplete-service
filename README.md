@@ -34,7 +34,7 @@ Set the term parameter to the desired term (only alphabetical terms allowed). No
 In a new Postman request, set the method to GET and enter the URL as follows: 
 
 ```
-curl localhost:9000/autocomplete?term=th
+localhost:9000/autocomplete?term=th
 ```
 
 Set the term parameter to the desired term (only alphabetical terms allowed) and hit `Send`. Note that this endpoint will only accept GET requests.
