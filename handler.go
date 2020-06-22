@@ -9,6 +9,8 @@ import (
 	"time"
 )
 
+const Routines = 30 // approximate number of routines
+
 // HANDLERS
 
 // autocompleteHandler handles requests to /autocomplete
@@ -50,7 +52,7 @@ func autocompleteHandler(w http.ResponseWriter, r *http.Request) {
 
 	// use file size to calculate standard buffer size
 	fsize := finfo.Size()
-	bufsize := fsize / 30
+	bufsize := fsize / Routines
 
 	log.Print("File Size: ", fsize, "\n\n")
 
@@ -89,10 +91,14 @@ func autocompleteHandler(w http.ResponseWriter, r *http.Request) {
 
 	final := reduceChunks(results) // reduce chunks into sorted PairList
 
-	// log 25 most frequent terms and build response string
-	resp := "25 Most Frequent Words Including the Term: " + term + "\n"
+	// log (at most) 25 most frequent terms and build response string
+	resp := "Most Frequent Words Including the Term: " + term + "\n"
 	i := 0
-	for i < 25 {
+	max := 25
+	if len(final) < 25 {
+		max = len(final)
+	}
+	for i < max {
 		log.Println(final[i])
 		resp += final[i].Key + ": " + strconv.Itoa(final[i].Value) + "\n"
 		i++

@@ -59,14 +59,37 @@ func searchChunk(chunk []byte, query string, wg *sync.WaitGroup, results chan<- 
 
 		t = strings.ToLower(t) // convert to lowercase
 
-		// either add map entry or increment current entry
-		if strings.Contains(t, query) {
-			if _, ok := res[t]; ok {
-				res[t]++
-			} else {
-				res[t] = 1
+		// EDGE CASE: sometimes words have new lines in their middle
+		if strings.Contains(t, "\n") {
+			temp := strings.Split(t, "\n")
+			for _, part := range temp {
+
+				// trim again
+				t = strings.TrimFunc(part, func(c rune) bool {
+					return !(c >= 65 && c <= 90) && !(c >= 97 && c <= 122)
+				})
+
+				// either add map entry or increment current entry
+				if strings.Contains(t, query) {
+					if _, ok := res[t]; ok {
+						res[t]++
+					} else {
+						res[t] = 1
+					}
+				}
+			}
+
+		} else {
+			// either add map entry or increment current entry
+			if strings.Contains(t, query) {
+				if _, ok := res[t]; ok {
+					res[t]++
+				} else {
+					res[t] = 1
+				}
 			}
 		}
+
 	}
 
 	results <- res // send map to channel

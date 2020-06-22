@@ -41,4 +41,3 @@ Set the term parameter to the desired term (only alphabetical terms allowed) and
 
 # Solution Verification and Performance
 Experimental results required by the [CHALLENGE.md](./CHALLENGE.md) can be found in [this Google Doc](https://docs.google.com/document/d/1qyLToFWBO2_EcWGMGZ9VSDEs9jTIdemhlohRlGtmEhQ/edit?usp=sharing).
-
