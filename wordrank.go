@@ -29,7 +29,7 @@ type Pair struct {
 
 type PairList []Pair
 
-// the following functions allow PaitList to implement sorting
+// the following functions allow PaitList to implement sort interface
 func (p PairList) Len() int           { return len(p) }
 func (p PairList) Less(i, j int) bool { return p[i].Value < p[j].Value }
 func (p PairList) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
