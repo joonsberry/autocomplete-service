@@ -1,5 +1,6 @@
 # autocomplete-service
 Creator: Jonathan Kenney (jonathankenney12@gmail.com)
+
 Solution for code challege: https://github.com/zesty-io/gists/blob/master/code-challenge-autocomplete
 
 # Setup
